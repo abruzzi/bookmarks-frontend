@@ -12,20 +12,21 @@ var gulp = require('gulp'),
 gulp.task('less', function() {
   gulp.src('assets/less/*.less')
     .pipe(less())
-    .pipe(gulp.dest('assets/style'))
-    .pipe(livereload());
+    .pipe(gulp.dest('assets/style'));
 });
 
 gulp.task('watch', function() {
     livereload.listen();
-    gulp.watch('assets/less/*.less', ['less']);
+    gulp.watch('assets/less/*.less', ['concatcss']);
+    gulp.watch('assets/script/*.js', ['browserify']);
 });
 
 gulp.task('browserify', function() {
     return browserify('assets/script/app.js')
         .bundle()
         .pipe(source('app.js'))
-        .pipe(gulp.dest('public/script'));
+        .pipe(gulp.dest('public/script'))
+        .pipe(livereload());
 });
 
 gulp.task('script', ['browserify'], function() {
@@ -38,7 +39,8 @@ gulp.task('script', ['browserify'], function() {
 gulp.task('concatcss', ['less'], function() {
     return gulp.src(['assets/style/*.css'])
         .pipe(concat('app.css'))
-        .pipe(gulp.dest('public/style/'));
+        .pipe(gulp.dest('public/style/'))
+        .pipe(livereload());
 });
 
 gulp.task('css', ['less'], function() {
