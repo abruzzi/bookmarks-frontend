@@ -13,3 +13,7 @@ get '/api/fav-feeds' do
 	content_type 'application/json'
 	File.open('mocks/fav-feeds.json').read
 end
+
+post '/api/feeds/:id' do
+	
+end

@@ -47,7 +47,6 @@ module.exports = Backbone.View.extend({
     	var that = this;
 
     	_.each(this.model.toJSON(), function(feed) {
-            console.log(feed);
     		return that.$el.append(new FeedView(feed).render());
     	});
 
@@ -69,6 +68,10 @@ module.exports = Backbone.View.extend({
         this.model.bind('change', _.bind(this.render, this));
     },
 
+    events: {
+        'click .favicon': 'toggleFavorite'
+    },
+
     tagName: 'li',
 
     className: 'feed',
@@ -76,9 +79,18 @@ module.exports = Backbone.View.extend({
     render: function() {
         var html = template(this.model.toJSON());
         this.$el.html(html);
-        
+
         return this.$el;
     },	
+
+    toggleFavorite: function(event) {
+        event.preventDefault();
+        var that = this;
+        $.post('/api/feeds/'+this.model.get('id')).done(function(){
+            var status = that.model.get('status');
+            that.model.set('status', !status);
+        });
+    }
 });
 },{"../templates/feed-view.hbs":4,"backbone":5,"jquery":15,"lodash":16}],4:[function(require,module,exports){
 // hbsfy compiled Handlebars template

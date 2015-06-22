@@ -12,6 +12,10 @@ module.exports = Backbone.View.extend({
         this.model.bind('change', _.bind(this.render, this));
     },
 
+    events: {
+        'click .favicon': 'toggleFavorite'
+    },
+
     tagName: 'li',
 
     className: 'feed',
@@ -19,7 +23,16 @@ module.exports = Backbone.View.extend({
     render: function() {
         var html = template(this.model.toJSON());
         this.$el.html(html);
-        
+
         return this.$el;
     },	
+
+    toggleFavorite: function(event) {
+        event.preventDefault();
+        var that = this;
+        $.post('/api/feeds/'+this.model.get('id')).done(function(){
+            var status = that.model.get('status');
+            that.model.set('status', !status);
+        });
+    }
 });
