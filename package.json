@@ -6,6 +6,11 @@
   "scripts": {
     "test": "npm test"
   },
+  "browserify": {
+    "transform": [
+      "hbsfy"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/abruzzi/bookmarks-frontend.git"
@@ -32,6 +37,7 @@
     "hbsfy": "^2.2.1",
     "jquery": "^2.1.4",
     "karma": "^0.12.36",
+    "lodash": "^3.9.3",
     "underscore": "^1.8.3",
     "vinyl-source-stream": "^1.1.0"
   }
