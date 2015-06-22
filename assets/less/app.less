@@ -1,8 +1,77 @@
-@bg-color: #05C3DE;
-@text-color: #ffffff;
+@import "_icomoon";
+
+@background-color: #ffffff;
+@link-color: #05C3DE;
+@text-color: #666666;
+@text-gray-color: #999999;
 
 body {
-	background-color: @bg-color;
+	margin: 0;
+	background-color: @background-color;
 	color: @text-color;
 	font-family: 'Open Sans', serif-sans;
+	font-size: 62.5%;
+}
+
+.container {
+	width: 90%;
+	max-width: 800px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.banner {
+	box-shadow: 0 1px 10px @text-gray-color;
+
+	h2 {
+		margin: 0;
+		padding: 1em 0;
+		text-align: center;
+		font-size: 2em;
+		background-color: @link-color;
+		color: #ffffff;
+		text-transform: uppercase;
+	}
+}
+
+@heart-color: #F04E98;
+
+.feeds {
+	margin: 0;
+	padding: 0;
+
+	li {
+		list-style: none;
+
+	}
+	
+	a {
+		color: @link-color;
+		text-decoration: none;
+	}
+
+	.feed-item {		
+		padding: 2em 1em;
+		position: relative;
+		border-bottom: 1px dashed @text-gray-color;
+
+		h3 {
+			font-size: 1.5em;
+			font-weight: normal;
+			margin: 0 2em;
+		} 
+
+		.favicon {
+			color: @heart-color;
+			position: absolute;
+			font-size: 1.5em;
+			margin: .3em 0;
+			cursor: pointer;
+		}
+
+		.date {
+			color: @text-gray-color;
+			float: right;
+		}
+	}
 }

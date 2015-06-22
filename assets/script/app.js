@@ -1,6 +1,7 @@
 var $ = require('jquery');
 
 $(function() {
-	console.log($);
-	console.log('application launched');
+	// $.get('/feeds').done(function(feeds) {
+		
+	// });
 });
