@@ -2,16 +2,19 @@
     {
         "id": 1,
         "url": "http://abruzzi.github.com/2015/03/list-comprehension-in-python/",
-        "title": "Python中的 list comprehension 以及 generator"
+        "title": "Python中的 list comprehension 以及 generator",
+        "publicDate": "2015年3月20日"
     },
     {
         "id": 2,
         "url": "http://abruzzi.github.com/2015/03/build-monitor-script-based-on-inotify/",
-        "title": "使用inotify/fswatch构建自动监控脚本"
+        "title": "使用inotify/fswatch构建自动监控脚本",
+        "publicDate": "2015年2月1日"
     },
     {
         "id": 3,
         "url": "http://abruzzi.github.com/2015/02/build-sample-application-by-using-underscore-and-jquery/",
-        "title": "使用underscore.js构建前端应用"
+        "title": "使用underscore.js构建前端应用",
+        "publicDate": "2015年1月20日"
     }
 ]
