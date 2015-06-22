@@ -1,14 +1,15 @@
 var $ = require('jquery');
-var Backbone = require('backbone');
 var _ = require('lodash');
+var Backbone = require('backbone');
 
 Backbone.$ = $;
 
 var FeedView = require('./feed-view.js');
+console.log(FeedView);
 
 module.exports = Backbone.View.extend({
-	initialize: function(model, itemRenderer) {
-        this.model = new Backbone.Model(model);
+	initialize: function(model) {
+        this.model = model;
         this.model.bind('change', _.bind(this.render, this));
     },
 

@@ -1,25 +1,41 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var $ = require('jquery');
 var FeedListView = require('./feed-list-view.js');
-
-$(function() {
-	$.get('/api/feeds').done(function(feeds) {
-		var feedListView = new FeedListView(feeds);
-		$('.container').append(feedListView.render());
-	});
-});
-},{"./feed-list-view.js":2,"jquery":15}],2:[function(require,module,exports){
-var $ = require('jquery');
 var Backbone = require('backbone');
+// var FeedListModel = require('./feed-list-model.js');
 var _ = require('lodash');
 
 Backbone.$ = $;
 
+$(function() {
+	var feeds = $.get('/api/feeds');
+	var favorite = $.get('/api/fav-feeds');
+
+	$.when(feeds, favorite).then(function(feeds, favorite) {
+		var ids = _.pluck(favorite[0], 'id');
+		var extended = _.map(feeds[0], function(feed) {
+			return _.extend(feed, {status: _.includes(ids, feed.id)});
+		});
+
+		var feedList = new Backbone.Collection(extended);
+		var feedListView = new FeedListView(feedList);
+
+		$('.container').append(feedListView.render());
+	});
+});
+},{"./feed-list-view.js":2,"backbone":5,"jquery":15,"lodash":16}],2:[function(require,module,exports){
+var $ = require('jquery');
+var _ = require('lodash');
+var Backbone = require('backbone');
+
+Backbone.$ = $;
+
 var FeedView = require('./feed-view.js');
+console.log(FeedView);
 
 module.exports = Backbone.View.extend({
-	initialize: function(model, itemRenderer) {
-        this.model = new Backbone.Model(model);
+	initialize: function(model) {
+        this.model = model;
         this.model.bind('change', _.bind(this.render, this));
     },
 
@@ -31,6 +47,7 @@ module.exports = Backbone.View.extend({
     	var that = this;
 
     	_.each(this.model.toJSON(), function(feed) {
+            console.log(feed);
     		return that.$el.append(new FeedView(feed).render());
     	});
 
@@ -39,8 +56,8 @@ module.exports = Backbone.View.extend({
 });
 },{"./feed-view.js":3,"backbone":5,"jquery":15,"lodash":16}],3:[function(require,module,exports){
 var $ = require('jquery');
-var Backbone = require('backbone');
 var _ = require('lodash');
+var Backbone = require('backbone');
 
 Backbone.$ = $;
 
@@ -59,17 +76,23 @@ module.exports = Backbone.View.extend({
     render: function() {
         var html = template(this.model.toJSON());
         this.$el.html(html);
-
+        
         return this.$el;
     },	
 });
 },{"../templates/feed-view.hbs":4,"backbone":5,"jquery":15,"lodash":16}],4:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
-module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var alias1=this.lambda, alias2=this.escapeExpression;
+module.exports = HandlebarsCompiler.template({"1":function(depth0,helpers,partials,data) {
+    return "	<span class=\"favicon icon-heart\"></span>\n";
+},"3":function(depth0,helpers,partials,data) {
+    return "	<span class=\"favicon icon-heart-o\"></span>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, alias1=this.lambda, alias2=this.escapeExpression;
 
-  return "<div class=\"feed-item\">\n	<span class=\"favicon icon-heart-o\"></span>\n	<a href=\""
+  return "<div class=\"feed-item\">\n"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.status : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "	\n	<a href=\""
     + alias2(alias1((depth0 != null ? depth0.url : depth0), depth0))
     + "\">\n		<h3>"
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))

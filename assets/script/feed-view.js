@@ -1,6 +1,6 @@
 var $ = require('jquery');
-var Backbone = require('backbone');
 var _ = require('lodash');
+var Backbone = require('backbone');
 
 Backbone.$ = $;
 
@@ -19,7 +19,7 @@ module.exports = Backbone.View.extend({
     render: function() {
         var html = template(this.model.toJSON());
         this.$el.html(html);
-
+        
         return this.$el;
     },	
 });
