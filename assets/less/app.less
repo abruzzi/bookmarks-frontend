@@ -22,19 +22,50 @@ body {
 
 .banner {
 	box-shadow: 0 1px 10px @text-gray-color;
+	background-color: @link-color;
+	color: #ffffff;
 
 	h2 {
 		margin: 0;
 		padding: 1em 0;
 		text-align: center;
 		font-size: 2em;
-		background-color: @link-color;
-		color: #ffffff;
 		text-transform: uppercase;
 	}
 }
 
 @heart-color: #F04E98;
+
+.status {
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+
+		li {
+			padding: 1em 0;
+			font-size: 1.5em;
+			float: left;
+		}
+		
+		.count {
+			padding: 0 1em;
+		}
+
+		.number {
+		    background-color: #ffffff;
+		    color: #22C3DC;
+		    display: inline-block;
+		    width: 1em;
+		    height: 1em;
+		    line-height: 1em;
+		    text-align: center;
+		    border-radius: 100%;
+		    padding: .2em;
+		}
+	}
+}
 
 .feeds {
 	margin: 0;
@@ -42,7 +73,6 @@ body {
 
 	li {
 		list-style: none;
-
 	}
 	
 	a {

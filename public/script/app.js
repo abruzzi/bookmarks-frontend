@@ -31,7 +31,6 @@ var Backbone = require('backbone');
 Backbone.$ = $;
 
 var FeedView = require('./feed-view.js');
-console.log(FeedView);
 
 module.exports = Backbone.View.extend({
 	initialize: function(model) {
