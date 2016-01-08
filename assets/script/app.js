@@ -4,11 +4,13 @@ var Backbone = require('backbone');
 // var FeedListModel = require('./feed-list-model.js');
 var _ = require('lodash');
 
+var config = require('./config');
+
 Backbone.$ = $;
 
 $(function() {
-	var feeds = $.get('/api/feeds');
-	var favorite = $.get('/api/fav-feeds');
+	var feeds = $.get(config.backend+'/api/feeds');
+	var favorite = $.get(config.backend+'/api/fav-feeds');
 
 	$.when(feeds, favorite).then(function(feeds, favorite) {
 		var ids = _.pluck(favorite[0], 'id');

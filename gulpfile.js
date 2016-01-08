@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
-    minifyCss = require('gulp-minify-css');
+    minifyCss = require('gulp-minify-css'),
+    replace = require('gulp-replace');
 
 gulp.task('less', function() {
   gulp.src('assets/less/*.less')
@@ -27,6 +28,20 @@ gulp.task('browserify', function() {
         .pipe(source('app.js'))
         .pipe(gulp.dest('public/script'))
         .pipe(livereload());
+});
+
+var backend = 'http://quiet-atoll-8237.herokuapp.com';
+
+gulp.task('prepareConfig', function() {
+    gulp.src(['assets/templates/config.js'])
+    .pipe(replace(/#backend#/g, 'http://localhost:8100'))
+    .pipe(gulp.dest('assets/script/'));
+});
+
+gulp.task('prepareRelease', function() {
+    gulp.src(['assets/templates/config.js'])
+    .pipe(replace(/#backend#/g, backend))
+    .pipe(gulp.dest('assets/script/'));
 });
 
 gulp.task('script', ['browserify'], function() {
@@ -50,7 +65,8 @@ gulp.task('css', ['less'], function() {
         .pipe(gulp.dest('public/style/'));
 });
 
-gulp.task('dev', ['browserify', 'concatcss']);
-gulp.task('build', ['script', 'css']);
+gulp.task('dev', ['prepareConfig', 'browserify', 'concatcss']);
+gulp.task('build', ['prepareConfig', 'script', 'css']);
+gulp.task('release', ['prepareRelease', 'script', 'css']);
 
 gulp.task('default', ['dev']);
