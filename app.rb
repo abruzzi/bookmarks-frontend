@@ -9,7 +9,7 @@ get '/api/feeds' do
 	File.open('mocks/feeds.json').read
 end
 
-get '/api/fav-feeds' do
+get '/api/fav-feeds/:id' do
 	content_type 'application/json'
 	File.open('mocks/fav-feeds.json').read
 end

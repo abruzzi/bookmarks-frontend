@@ -10,7 +10,7 @@ Backbone.$ = $;
 
 $(function() {
 	var feeds = $.get(config.backend+'/api/feeds');
-	var favorite = $.get(config.backend+'/api/fav-feeds');
+	var favorite = $.get(config.backend+'/api/fav-feeds/1');
 
 	$.when(feeds, favorite).then(function(feeds, favorite) {
 		var ids = _.pluck(favorite[0], 'id');
