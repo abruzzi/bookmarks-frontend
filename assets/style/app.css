@@ -39,7 +39,7 @@ body {
 }
 .banner {
   box-shadow: 0 1px 10px #999999;
-  background-color: #05c3de;
+  background-color: #05C3DE;
   color: #ffffff;
 }
 .banner h2 {
@@ -82,7 +82,7 @@ body {
   list-style: none;
 }
 .feeds a {
-  color: #05c3de;
+  color: #05C3DE;
   text-decoration: none;
 }
 .feeds .feed-item {
@@ -96,7 +96,7 @@ body {
   margin: 0 2em;
 }
 .feeds .feed-item .favicon {
-  color: #f04e98;
+  color: #F04E98;
   position: absolute;
   font-size: 1.5em;
   margin: .3em 0;
