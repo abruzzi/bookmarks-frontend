@@ -27,7 +27,7 @@ $(function() {
 });
 },{"./config":2,"./feed-list-view.js":3,"backbone":6,"jquery":16,"lodash":17}],2:[function(require,module,exports){
 module.exports = {
-	backend: 'http://quiet-atoll-8237.herokuapp.com'
+	backend: 'http://localhost:8100'
 }
 },{}],3:[function(require,module,exports){
 var $ = require('jquery');

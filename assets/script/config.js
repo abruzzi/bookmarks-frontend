@@ -1,3 +1,3 @@
 module.exports = {
-	backend: 'http://quiet-atoll-8237.herokuapp.com'
+	backend: 'http://localhost:8100'
 }
