@@ -38,6 +38,12 @@ gulp.task('prepareConfig', function() {
     .pipe(gulp.dest('assets/script/'));
 });
 
+gulp.task('prepareStaging', function() {
+    gulp.src(['assets/templates/config.js'])
+    .pipe(replace(/#backend#/g, 'http://192.168.99.100:8000'))
+    .pipe(gulp.dest('assets/script/'));
+});
+
 gulp.task('prepareRelease', function() {
     gulp.src(['assets/templates/config.js'])
     .pipe(replace(/#backend#/g, backend))
@@ -67,6 +73,7 @@ gulp.task('css', ['less'], function() {
 
 gulp.task('dev', ['prepareConfig', 'browserify', 'concatcss']);
 gulp.task('build', ['prepareConfig', 'script', 'css']);
+gulp.task('staging', ['prepareStaging', 'script', 'css']);
 gulp.task('release', ['prepareRelease', 'script', 'css']);
 
 gulp.task('default', ['dev']);

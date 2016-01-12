@@ -27,7 +27,7 @@ $(function() {
 });
 },{"./config":2,"./feed-list-view.js":3,"backbone":6,"jquery":16,"lodash":17}],2:[function(require,module,exports){
 module.exports = {
-	backend: 'http://localhost:8100'
+	backend: 'http://192.168.99.100:8000'
 }
 },{}],3:[function(require,module,exports){
 var $ = require('jquery');

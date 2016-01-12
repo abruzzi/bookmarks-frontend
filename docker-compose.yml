@@ -1,0 +1,8 @@
+app:
+  build: .
+  ports:
+    - 8080:8080
+  volumes:
+    - .:/web
+  working_dir: /web
+  entrypoint: /web/start.sh
